@@ -1,0 +1,41 @@
+.controls {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  margin: auto;
+  margin-bottom: 10px;
+  border: 1px solid rgb(179, 179, 179);
+}
+
+.input {
+  color: #171718;
+  font-size: 16px;
+  min-height: 38px;
+  padding: 4px 8px;
+  border: 1px solid rgb(179, 179, 179);
+  width: 200px;
+  outline: 0;
+  transition: border-color 200ms ease-in-out;
+}
+
+.input:focus {
+  border-width: 2px;
+  border-color: rgb(38, 132, 255);
+}
+.button {
+  display: inline-block;
+  min-width: 150px;
+  border: 1px solid rgb(179, 179, 179);
+  padding: 6px 16px;
+  margin-left: 4px;
+  margin-right: 4px;
+  background-color: #fff;
+  transition: all 200ms ease;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 24px;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}

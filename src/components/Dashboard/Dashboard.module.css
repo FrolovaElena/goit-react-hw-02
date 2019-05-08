@@ -1,0 +1,10 @@
+.dashboard {
+  margin: auto;
+  margin-bottom: 50px;
+  width: 800px;
+  line-height: 1.8;
+  font-family: 'Arial', sans-serif;
+  color: #343434;
+  border: 20px solid #dcdcdc;
+  padding: 30px 70px;
+}

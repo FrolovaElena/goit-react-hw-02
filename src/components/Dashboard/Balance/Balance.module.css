@@ -1,0 +1,9 @@
+.balance {
+  display: flex;
+  justify-content: space-around;
+  width: 400px;
+  padding: 4px 16px;
+  margin: auto;
+  margin-bottom: 10px;
+  border: 1px solid rgb(179, 179, 179);
+}

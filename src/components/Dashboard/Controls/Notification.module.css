@@ -1,0 +1,11 @@
+.notification {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  padding: 20px 40px;
+  background-color: #f16363;
+  border-radius: 4%;
+  color: #fff;
+  text-align: center;
+}

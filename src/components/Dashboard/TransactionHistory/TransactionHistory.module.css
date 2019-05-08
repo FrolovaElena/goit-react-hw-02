@@ -1,0 +1,17 @@
+.history {
+  width: 500px;
+  margin: auto;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.head {
+  padding: 10px;
+  font-size: 16px;
+  text-transform: uppercase;
+  border: 1px solid #ccc;
+}
+
+.row {
+  border: 1px solid #ccc;
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "3sWpPeysQq",
+    "type": "Deposit",
+    "amount": 200,
+    "date": "04.17.2019, 12:40:55"
+  },
+  {
+    "id": "Bd5P0dGgOv",
+    "type": "Withdrawal",
+    "amount": 150,
+    "date": "04.18.2019, 14:15:23"
+  },
+  {
+    "id": "XrqIM2PODE",
+    "type": "Deposit",
+    "amount": 300,
+    "date": "07.21.2019, 12:50:35"
+  },
+  {
+    "id": "f1k-iGdLi",
+    "type": "Withdrawal",
+    "amount": 80,
+    "date": "08.17.2019, 22:35:17"
+  }
+]
