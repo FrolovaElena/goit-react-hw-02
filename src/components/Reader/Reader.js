@@ -38,10 +38,10 @@ export default class Reader extends Component {
     return (
       <div className={styles.reader}>
         <Publication title={items[index].title} text={items[index].text} />
-        <Counter index={index} length={items.length} />
+        <Counter current={index + 1} total={items.length} />
         <Controls
-          index={index}
-          length={items.length}
+          current={index + 1}
+          total={items.length}
           onIncrement={this.handleIncrement}
           onDecrement={this.handleDecrement}
         />

@@ -2,15 +2,15 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styles from './Counter.module.css';
 
-const Counter = ({ index, length }) => (
+const Counter = ({ current, total }) => (
   <p className={styles.counter}>
-    {index + 1}/{length}
+    {current}/{total}
   </p>
 );
 
 Counter.propTypes = {
-  index: propTypes.number.isRequired,
-  length: propTypes.number.isRequired,
+  current: propTypes.number.isRequired,
+  total: propTypes.number.isRequired,
 };
 
 export default Counter;

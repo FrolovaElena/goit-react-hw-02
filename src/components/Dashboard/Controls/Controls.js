@@ -11,6 +11,8 @@ export default class Controls extends Component {
 
   state = {
     amount: '',
+    showErrorNull: false,
+    showErrorLack: false,
   };
 
   handleChange = event => {
@@ -22,26 +24,37 @@ export default class Controls extends Component {
   };
 
   handleClickDeposit = () => {
-    if (this.state.amount > 0 && this.state.amount <= this.props.currentBalance)
-      this.props.onAddTransaction({
-        ...this.state,
-        type: 'Deposit',
-      });
+    const { amount } = this.state;
+
+    amount > 0 && amount !== ''
+      ? this.props.onAddTransaction(amount, 'Deposit')
+      : this.setState({ showErrorNull: true });
+
     this.setState({ amount: '' });
   };
 
   handleClickWithdraw = () => {
-    if (this.state.amount > 0 && this.state.amount <= this.props.currentBalance)
-      this.props.onAddTransaction({
-        ...this.state,
-        type: 'Withdrawal',
-      });
+    const { amount } = this.state;
+    const { currentBalance } = this.props;
+
+    if (amount > 0 && amount <= currentBalance) {
+      this.props.onAddTransaction(amount, 'Withdrawal');
+    } else if (amount > currentBalance) {
+      this.setState({ showErrorLack: true });
+    } else {
+      this.setState({ showErrorNull: true });
+    }
+
     this.setState({ amount: '' });
   };
 
+  handleFocus = () => {
+    this.setState({ showErrorNull: false, showErrorLack: false });
+  };
+
   render() {
-    const { amount } = this.state;
-    const { currentBalance } = this.props;
+    const { amount, showErrorNull, showErrorLack } = this.state;
+
     return (
       <section className={styles.controls}>
         <input
@@ -49,6 +62,7 @@ export default class Controls extends Component {
           value={amount}
           className={styles.input}
           onChange={this.handleChange}
+          onFocus={this.handleFocus}
         />
         <button
           type="button"
@@ -64,11 +78,12 @@ export default class Controls extends Component {
         >
           Withdraw
         </button>
-        {amount === 0 && (
-          <Notification massage="Введите сумму для проведения операции!" />
+
+        {showErrorNull && (
+          <Notification massage="Введите сумму для проведения операции" />
         )}
-        {amount > currentBalance && (
-          <Notification massage="На счету недостаточно средств для проведения операции!" />
+        {showErrorLack && (
+          <Notification massage="На счету недостаточно средств для проведения операции" />
         )}
       </section>
     );

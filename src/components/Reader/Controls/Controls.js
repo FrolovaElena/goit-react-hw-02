@@ -2,13 +2,13 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styles from './Controls.module.css';
 
-const Controls = ({ index, length, onIncrement, onDecrement }) => (
+const Controls = ({ current, total, onIncrement, onDecrement }) => (
   <section className={styles.controls}>
     <button
       type="button"
       onClick={onDecrement}
       className={styles.button}
-      disabled={index <= 0}
+      disabled={current === 1}
     >
       Назад
     </button>
@@ -16,7 +16,7 @@ const Controls = ({ index, length, onIncrement, onDecrement }) => (
       type="button"
       onClick={onIncrement}
       className={styles.button}
-      disabled={index > length - 2}
+      disabled={current === total}
     >
       Вперед
     </button>
@@ -24,8 +24,8 @@ const Controls = ({ index, length, onIncrement, onDecrement }) => (
 );
 
 Controls.propTypes = {
-  index: propTypes.number.isRequired,
-  length: propTypes.number.isRequired,
+  current: propTypes.number.isRequired,
+  total: propTypes.number.isRequired,
   onIncrement: propTypes.func.isRequired,
   onDecrement: propTypes.func.isRequired,
 };

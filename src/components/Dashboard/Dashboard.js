@@ -11,48 +11,40 @@ export default class Dashboard extends Component {
     history: transactions,
   };
 
-  addTransaction = transaction => {
+  addTransaction = (amount, type) => {
     const newTransaction = {
-      ...transaction,
       id: shortid.generate(),
+      amount,
+      type,
       date: new Date().toLocaleString(),
     };
-
     this.setState(state => ({
       history: [...state.history, newTransaction],
     }));
   };
 
-  getIncomesAndExpenses = type => {
-    return this.state.history
-      .filter(data => data.type === type)
+  getIncomesAndExpenses = () => {
+    const incomes = this.state.history
+      .filter(data => data.type === 'Deposit')
       .reduce((sum, item) => sum + item.amount, 0);
-  };
+    const expenses = this.state.history
+      .filter(data => data.type === 'Withdrawal')
+      .reduce((sum, item) => sum + item.amount, 0);
 
-  changeBalance = () => {
-    return (
-      this.getIncomesAndExpenses('Deposit') -
-      this.getIncomesAndExpenses('Withdrawal')
-    );
+    return { incomes, expenses };
   };
 
   render() {
     const { history } = this.state;
-    const incomes = this.getIncomesAndExpenses('Deposit');
-    const expenses = this.getIncomesAndExpenses('Withdrawal');
-    const currentBalance = this.changeBalance();
+    const { incomes, expenses } = this.getIncomesAndExpenses();
 
     return (
       <div className={styles.dashboard}>
         <Controls
-          currentBalance={currentBalance}
+          currentBalance={incomes - expenses}
           onAddTransaction={this.addTransaction}
         />
-        <Balance
-          currentBalance={currentBalance}
-          incomes={incomes}
-          expenses={expenses}
-        />
+        <Balance incomes={incomes} expenses={expenses} />
         <TransactionHistory items={history} />
       </div>
     );

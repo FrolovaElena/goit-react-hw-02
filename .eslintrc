@@ -35,7 +35,8 @@
       2,
       "always",
       { "ignoreClassFields": true }
-    ]
+    ],
+    "no-unused-expressions": 0
   },
   "globals": {
     "window": true,

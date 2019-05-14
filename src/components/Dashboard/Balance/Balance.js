@@ -2,16 +2,15 @@ import React from 'react';
 import propTypes from 'prop-types';
 import styles from './Balance.module.css';
 
-const Balance = ({ currentBalance, incomes, expenses }) => (
+const Balance = ({ incomes, expenses }) => (
   <section className={styles.balance}>
     <span>+{incomes}$</span>
     <span>-{expenses}$</span>
-    <span>Balance: {currentBalance}$</span>
+    <span>Balance: {incomes - expenses}$</span>
   </section>
 );
 
 Balance.propTypes = {
-  currentBalance: propTypes.number.isRequired,
   incomes: propTypes.number.isRequired,
   expenses: propTypes.number.isRequired,
 };
