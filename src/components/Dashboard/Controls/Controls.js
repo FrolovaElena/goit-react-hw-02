@@ -10,56 +10,53 @@ export default class Controls extends Component {
   };
 
   state = {
-    amount: '',
-    showErrorNull: false,
-    showErrorLack: false,
+    amountCurrent: '',
+    amountBeforeReset: 0,
+    showError: false,
   };
 
   handleChange = event => {
     const value = Number(event.target.value);
 
     this.setState({
-      amount: value,
+      amountCurrent: value,
     });
   };
 
   handleClickDeposit = () => {
-    const { amount } = this.state;
+    const { amountCurrent } = this.state;
 
-    amount > 0 && amount !== ''
-      ? this.props.onAddTransaction(amount, 'Deposit')
-      : this.setState({ showErrorNull: true });
+    amountCurrent > 0 && amountCurrent !== ''
+      ? this.props.onAddTransaction(amountCurrent, 'Deposit')
+      : this.setState({ showError: true, amountBeforeReset: amountCurrent });
 
-    this.setState({ amount: '' });
+    this.setState({ amountCurrent: '' });
   };
 
   handleClickWithdraw = () => {
-    const { amount } = this.state;
+    const { amountCurrent } = this.state;
     const { currentBalance } = this.props;
 
-    if (amount > 0 && amount <= currentBalance) {
-      this.props.onAddTransaction(amount, 'Withdrawal');
-    } else if (amount > currentBalance) {
-      this.setState({ showErrorLack: true });
-    } else {
-      this.setState({ showErrorNull: true });
-    }
+    amountCurrent > 0 && amountCurrent !== '' && amountCurrent <= currentBalance
+      ? this.props.onAddTransaction(amountCurrent, 'Withdrawal')
+      : this.setState({ showError: true, amountBeforeReset: amountCurrent });
 
-    this.setState({ amount: '' });
+    this.setState({ amountCurrent: '' });
   };
 
   handleFocus = () => {
-    this.setState({ showErrorNull: false, showErrorLack: false });
+    this.setState({ showError: false });
   };
 
   render() {
-    const { amount, showErrorNull, showErrorLack } = this.state;
+    const { amountCurrent, amountBeforeReset, showError } = this.state;
+    const { currentBalance } = this.props;
 
     return (
       <section className={styles.controls}>
         <input
           type="text"
-          value={amount}
+          value={amountCurrent}
           className={styles.input}
           onChange={this.handleChange}
           onFocus={this.handleFocus}
@@ -79,11 +76,14 @@ export default class Controls extends Component {
           Withdraw
         </button>
 
-        {showErrorNull && (
-          <Notification massage="Введите сумму для проведения операции" />
-        )}
-        {showErrorLack && (
-          <Notification massage="На счету недостаточно средств для проведения операции" />
+        {showError && (
+          <Notification
+            massage={
+              amountBeforeReset > currentBalance
+                ? 'На счету недостаточно средств для проведения операции'
+                : 'Введите сумму для проведения операции'
+            }
+          />
         )}
       </section>
     );
